@@ -1,5 +1,3 @@
-### README do Projeto DevsBurguer
-
 # DevsBurguer
 
 DevsBurguer é um sistema de pedidos de hambúrguer, desenvolvido utilizando TypeScript e Express. O objetivo é criar um sistema backend capaz de gerenciar usuários e processar pedidos de forma eficiente. Atualmente, o sistema permite a criação, listagem e busca de usuários.
