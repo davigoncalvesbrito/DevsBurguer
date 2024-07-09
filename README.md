@@ -5,6 +5,7 @@ DevsBurguer é um sistema de pedidos de hambúrguer, desenvolvido utilizando Typ
 ## Funcionalidades Implementadas
 
 ### Usuários
+
 - **Criar Usuário:** Permite criar um novo usuário com as informações fornecidas.
 - **Listar Todos os Usuários:** Retorna a lista de todos os usuários cadastrados.
 - **Buscar Usuário por ID:** Retorna os detalhes de um usuário específico com base no ID fornecido.
@@ -25,10 +26,8 @@ DevsBurguer é um sistema de pedidos de hambúrguer, desenvolvido utilizando Typ
 
 - **Modelos:** Representa a estrutura dos dados.
   - `User`: Classe que define a estrutura do usuário.
-  
 - **Serviços:** Contém a lógica de negócios.
   - `UserService`: Classe que gerencia a criação, listagem e busca de usuários.
-  
 - **Controladores:** Gerencia a interação entre o serviço e as rotas.
   - `UserController`: Classe que define os métodos para criar, listar e buscar usuários.
 
@@ -57,21 +56,22 @@ src/
 ### Instalação
 
 1. Clone o repositório:
+
    ```bash
    git clone https://github.com/davigoncalvesbrito/DevsBurguer.git
-   
 
-   Instale as dependências: 
-   
+
+   Instale as dependências:
+
    npm install
 
    Crie um arquivo .env na raiz do projeto com as seguintes configurações:
-   
+
    PORT=3000
 
    Para iniciar o servidor de desenvolvimento, execute:
-   
-   npm run dev
-   
-   O servidor estará rodando em http://localhost:3000.
 
+   npm run dev
+
+   O servidor estará rodando em http://localhost:3000.
+   ```
