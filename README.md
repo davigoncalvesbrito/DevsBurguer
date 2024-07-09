@@ -51,29 +51,17 @@ src/
 Configuração do Ambiente de Desenvolvimento
 Pré-requisitos
 Node.js instalado
-npm (ou yarn) instalado
-Instalação
-Clone o repositório:
+npm instalado
 
-bash
-Copiar código
-git clone https://github.com/davigoncalvesbrito/DevsBurguer.git
-cd DevsBurguer
+
 Instale as dependências:
-
-bash
-Copiar código
 npm install
 Crie um arquivo .env na raiz do projeto com as seguintes configurações:
-
-env
-Copiar código
+.env
 PORT=3000
-Executando o Servidor
-Para iniciar o servidor de desenvolvimento, execute:
 
-bash
-Copiar código
+
+Para iniciar o servidor de desenvolvimento, execute:
 npm run dev
 O servidor estará rodando em http://localhost:3000.
 
@@ -85,16 +73,15 @@ Criar Usuário
 Endpoint: POST http://localhost:3000/api/users
 Body:
 json
-Copiar código
 {
   "name": "John Doe",
   "phone": "1234567890",
   "password": "password",
   "address": "123 Main St"
 }
+
 Resposta esperada:
 json
-Copiar código
 {
   "message": "Usuário cadastrado com sucesso",
   "user": {
@@ -105,12 +92,12 @@ Copiar código
     "address": "123 Main St"
   }
 }
+
 Listar Todos os Usuários
 
 Endpoint: GET http://localhost:3000/api/users
 Resposta esperada quando há usuários:
 json
-Copiar código
 {
   "message": "Usuários listados com sucesso",
   "users": [
@@ -125,7 +112,6 @@ Copiar código
 }
 Resposta esperada quando não há usuários:
 json
-Copiar código
 {
   "message": "Usuários não encontrados"
 }
@@ -134,7 +120,6 @@ Buscar Usuário por ID
 Endpoint: GET http://localhost:3000/api/users/1
 Resposta esperada:
 json
-Copiar código
 {
   "id": "1",
   "name": "John Doe",
