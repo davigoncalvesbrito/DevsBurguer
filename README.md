@@ -47,6 +47,7 @@ src/
 ├── services/
 │   └── userService.ts
 └── server.ts
+```
 
 Configuração do Ambiente de Desenvolvimento
 Pré-requisitos
