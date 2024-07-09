@@ -49,82 +49,31 @@ src/
 └── server.ts
 ```
 
-Configuração do Ambiente de Desenvolvimento
-Pré-requisitos
-Node.js instalado
-npm instalado
+## Configuração do Ambiente de Desenvolvimento
 
+### Pré-requisitos
 
-Instale as dependências:
-npm install
-Crie um arquivo .env na raiz do projeto com as seguintes configurações:
-.env
-PORT=3000
+- Node.js instalado
+- npm instalado
 
+### Instalação
 
-Para iniciar o servidor de desenvolvimento, execute:
-npm run dev
-O servidor estará rodando em http://localhost:3000.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/davigoncalvesbrito/DevsBurguer.git
+   
 
-Testando as Funcionalidades
-Você pode usar ferramentas como Postman ou cURL para testar as rotas da API.
+   Instale as dependências: 
+   
+   npm install
 
-Criar Usuário
+   Crie um arquivo .env na raiz do projeto com as seguintes configurações:
+   
+   PORT=3000
 
-Endpoint: POST http://localhost:3000/api/users
-Body:
-json
-{
-  "name": "John Doe",
-  "phone": "1234567890",
-  "password": "password",
-  "address": "123 Main St"
-}
+   Para iniciar o servidor de desenvolvimento, execute:
+   
+   npm run dev
+   
+   O servidor estará rodando em http://localhost:3000.
 
-Resposta esperada:
-json
-{
-  "message": "Usuário cadastrado com sucesso",
-  "user": {
-    "id": "1",
-    "name": "John Doe",
-    "phone": "1234567890",
-    "password": "password",
-    "address": "123 Main St"
-  }
-}
-
-Listar Todos os Usuários
-
-Endpoint: GET http://localhost:3000/api/users
-Resposta esperada quando há usuários:
-json
-{
-  "message": "Usuários listados com sucesso",
-  "users": [
-    {
-      "id": "1",
-      "name": "John Doe",
-      "phone": "1234567890",
-      "password": "password",
-      "address": "123 Main St"
-    }
-  ]
-}
-Resposta esperada quando não há usuários:
-json
-{
-  "message": "Usuários não encontrados"
-}
-Buscar Usuário por ID
-
-Endpoint: GET http://localhost:3000/api/users/1
-Resposta esperada:
-json
-{
-  "id": "1",
-  "name": "John Doe",
-  "phone": "1234567890",
-  "password": "password",
-  "address": "123 Main St"
-}
