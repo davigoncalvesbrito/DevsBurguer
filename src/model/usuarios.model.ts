@@ -10,7 +10,7 @@ export class Usuario {
         this.senha = senha;
     }
 
-    //Receber
+    //Receber aa
     public getId():number {
         return this.id;
     }
