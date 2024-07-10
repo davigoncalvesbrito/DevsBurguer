@@ -4,42 +4,36 @@ import { UserService } from '../services/userService';
 const userService = new UserService();
 
 export class UserController {
+  // Método para criar um novo usuário
   static async createUser(req: Request, res: Response) {
     try {
-      const { name, phone, password, address } = req.body;
+      const { id, name, phone, password, address } = req.body;
       const user = await userService.createUser({
+        id,
         name,
         phone,
         password,
         address,
       });
 
-      // Remove a senha do objeto de usuário antes de enviar a resposta
-      const { password: userPassword, ...userWithoutPassword } = user;
-
       res.status(201).json({
         message: 'Usuário cadastrado com sucesso',
-        user: userWithoutPassword, // Retorna o usuário sem o campo 'password'
+        user,
       });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
     }
   }
 
+  // Método para obter um usuário por ID
   static async getUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const user = await userService.getUser(id);
       if (user) {
-        // Remove a senha do objeto de usuário antes de enviar a resposta
-        const { password: userPassword, ...userWithoutPassword } = user;
-        res
-          .status(200)
-          .json({ message: 'Usuário encontrado', user: userWithoutPassword });
+        res.status(200).json({ message: 'Usuário encontrado', user });
       } else {
-        res
-          .status(404)
-          .json({ message: 'Id fornecido não existe ou não encontrado' });
+        res.status(404).json({ message: 'Usuário não encontrado' });
       }
     } catch (error: any) {
       res
@@ -48,24 +42,11 @@ export class UserController {
     }
   }
 
+  // Método para obter todos os usuários
   static async getAllUsers(req: Request, res: Response) {
     try {
       const users = await userService.getAllUsers();
-
-      // Remove a senha de todos os usuários antes de enviar a resposta
-      const usersWithoutPasswords = users.map((user) => {
-        const { password: userPassword, ...userWithoutPassword } = user;
-        return userWithoutPassword;
-      });
-
-      if (usersWithoutPasswords.length > 0) {
-        res.status(200).json({
-          message: 'Usuários listados com sucesso',
-          users: usersWithoutPasswords,
-        });
-      } else {
-        res.status(404).json({ message: 'Usuários não encontrados' });
-      }
+      res.status(200).json({ message: 'Usuários listados com sucesso', users });
     } catch (error: any) {
       res
         .status(500)
@@ -73,6 +54,7 @@ export class UserController {
     }
   }
 
+  // Método para atualizar um usuário existente
   static async updateUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
@@ -85,17 +67,16 @@ export class UserController {
       });
 
       if (updatedUser) {
-        // Remove a senha do objeto de usuário atualizado antes de enviar a resposta
-        const { password: userPassword, ...userWithoutPassword } = updatedUser;
-        res.status(200).json({
-          message: 'Usuário atualizado com sucesso',
-          user: userWithoutPassword,
-        });
+        res
+          .status(200)
+          .json({
+            message: 'Usuário atualizado com sucesso',
+            user: updatedUser,
+          });
       } else {
-        res.status(404).json({
-          message:
-            'Id fornecido não existe ou usuário não encontrado para atualização',
-        });
+        res
+          .status(404)
+          .json({ message: 'Usuário não encontrado para atualização' });
       }
     } catch (error: any) {
       res
@@ -104,19 +85,20 @@ export class UserController {
     }
   }
 
+  // Método para deletar um usuário
   static async deleteUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const deletedUser = await userService.deleteUser(id);
+
       if (deletedUser) {
-        // Remove a senha do objeto de usuário deletado antes de enviar a resposta
-        const { password: userPassword, ...userWithoutPassword } = deletedUser;
-        res.status(200).json({
-          message: 'Usuário deletado com sucesso',
-          user: userWithoutPassword,
-        });
+        res
+          .status(200)
+          .json({ message: 'Usuário deletado com sucesso', user: deletedUser });
       } else {
-        res.status(404).json({ message: 'Usuário não encontrado' });
+        res
+          .status(404)
+          .json({ message: 'Usuário não encontrado para deleção' });
       }
     } catch (error: any) {
       res

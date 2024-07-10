@@ -1,67 +1,71 @@
-import { User } from '../models/user';
+import { User } from '../models/user'; // Importe o modelo de usuário
 
 export class UserService {
-  private users: User[] = [];
-  private nextId: number = 1;
+  // Método para criar um novo usuário
+  async createUser(data: {
+    id: string;
+    name: string;
+    phone: string;
+    password: string;
+    address: string;
+  }): Promise<User> {
+    try {
+      // Cria um usuário com os dados fornecidos
+      const newUser = await User.create({
+        ...data,
+      });
 
-  private getNextId(): string {
-    return this.nextId.toString();
+      return newUser;
+    } catch (error: any) {
+      throw new Error(`Erro ao criar usuário: ${error.message}`);
+    }
   }
 
-  private incrementNextId(): void {
-    this.nextId++;
+  // Método para obter um usuário por ID
+  async getUser(id: string): Promise<User | null> {
+    try {
+      const user = await User.findByPk(id);
+      return user;
+    } catch (error: any) {
+      throw new Error(`Erro ao buscar usuário: ${error.message}`);
+    }
   }
 
-  async createUser(data: Partial<User>): Promise<User> {
-    const newUser = new User(
-      this.getNextId(),
-      data.name!,
-      data.phone!,
-      data.password!,
-      data.address!,
-    );
-    this.users.push(newUser);
-    this.incrementNextId();
-    return newUser;
-  }
-
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.find((user) => user.id === id); // Busca o usuário pelo ID
-  }
-
+  // Método para obter todos os usuários
   async getAllUsers(): Promise<User[]> {
-    return this.users; // Retorna todos os usuários
+    try {
+      const users = await User.findAll();
+      return users;
+    } catch (error: any) {
+      throw new Error(`Erro ao buscar todos os usuários: ${error.message}`);
+    }
   }
 
-  async updateUser(id: string, data: Partial<User>): Promise<User | undefined> {
-    const userIndex = this.users.findIndex((user) => user.id === id);
-    if (userIndex === -1) {
-      return undefined; // Retorna undefined se o usuário não for encontrado
+  // Método para atualizar um usuário existente
+  async updateUser(id: string, data: Partial<User>): Promise<User | null> {
+    try {
+      const user = await User.findByPk(id);
+      if (user) {
+        await user.update(data);
+        return user;
+      }
+      return null;
+    } catch (error: any) {
+      throw new Error(`Erro ao atualizar usuário: ${error.message}`);
     }
-
-    // Atualiza apenas os campos recebidos e mantém os outros intactos
-    const updatedUser = { ...this.users[userIndex], ...data };
-
-    // Valida os campos do usuário atualizado
-    const updatedUserInstance = new User(
-      updatedUser.id,
-      updatedUser.name,
-      updatedUser.phone,
-      updatedUser.password,
-      updatedUser.address,
-    );
-
-    this.users[userIndex] = updatedUserInstance;
-    return updatedUserInstance;
   }
 
-  async deleteUser(id: string): Promise<User | undefined> {
-    const userIndex = this.users.findIndex((user) => user.id === id);
-    if (userIndex === -1) {
-      return undefined; // Retorna undefined se o usuário não for encontrado
+  // Método para deletar um usuário
+  async deleteUser(id: string): Promise<User | null> {
+    try {
+      const user = await User.findByPk(id);
+      if (user) {
+        await user.destroy();
+        return user;
+      }
+      return null;
+    } catch (error: any) {
+      throw new Error(`Erro ao deletar usuário: ${error.message}`);
     }
-
-    const deletedUser = this.users.splice(userIndex, 1)[0];
-    return deletedUser;
   }
 }

@@ -2,9 +2,8 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-
-import userRoutes from './routes/userRoutes';
-// Importe outras rotas conforme necessário
+import { connectDatabase } from '../src/dbConfig'; // Importe a função de conexão corretamente
+import userRoutes from './routes/userRoutes'; // Importe suas rotas de usuário
 
 dotenv.config();
 
@@ -13,9 +12,17 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/api', userRoutes); // Usando prefixo '/api' para as rotas
+// Use suas rotas de usuário
+app.use('/api', userRoutes); // Use prefixo '/api' para as rotas de usuário
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+
+connectDatabase()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Erro ao iniciar o servidor:', err);
+  });
