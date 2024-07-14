@@ -4,6 +4,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from '../src/dbConfig'; // Importe a função de conexão corretamente
 import userRoutes from './routes/userRoutes'; // Importe suas rotas de usuário
+import productRouter from './routes/productRouter';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 // Use suas rotas de usuário
 app.use('/api', userRoutes); // Use prefixo '/api' para as rotas de usuário
+app.use('/menu', productRouter); // Use prefixo '/api' para as rotas de usuário
 
 const PORT = process.env.PORT || 3000;
 
