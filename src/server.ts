@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 // Use suas rotas de usuário
 app.use('/api', userRoutes); // Use prefixo '/api' para as rotas de usuário
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 connectDatabase()
   .then(() => {

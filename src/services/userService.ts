@@ -1,18 +1,15 @@
 import { User } from '../models/user'; // Importe o modelo de usuário
-
+import { CreateUserInput } from '../utils/types';
 export class UserService {
   // Método para criar um novo usuário
-  async createUser(data: {
-    id: string;
-    name: string;
-    phone: string;
-    password: string;
-    address: string;
-  }): Promise<User> {
+  async createUser(data: CreateUserInput): Promise<User> {
     try {
       // Cria um usuário com os dados fornecidos
       const newUser = await User.create({
-        ...data,
+        name: data.name,
+        phone: data.phone,
+        password: data.password,
+        address: data.address,
       });
 
       return newUser;

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
+import { CreateUserInput } from '../utils/types';
 
 const userService = new UserService();
 
@@ -7,9 +8,8 @@ export class UserController {
   // Método para criar um novo usuário
   static async createUser(req: Request, res: Response) {
     try {
-      const { id, name, phone, password, address } = req.body;
+      const { name, phone, password, address } = req.body as CreateUserInput;
       const user = await userService.createUser({
-        id,
         name,
         phone,
         password,
@@ -67,12 +67,10 @@ export class UserController {
       });
 
       if (updatedUser) {
-        res
-          .status(200)
-          .json({
-            message: 'Usuário atualizado com sucesso',
-            user: updatedUser,
-          });
+        res.status(200).json({
+          message: 'Usuário atualizado com sucesso',
+          user: updatedUser,
+        });
       } else {
         res
           .status(404)
