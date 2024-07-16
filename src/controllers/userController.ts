@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
 import { CreateUserInput } from '../utils/types';
+import { User } from '../models/user';
+import { formatUser } from '../models/user';
 
 const userService = new UserService();
 
@@ -9,16 +11,18 @@ export class UserController {
   static async createUser(req: Request, res: Response) {
     try {
       const { name, phone, password, address } = req.body as CreateUserInput;
-      const user = await userService.createUser({
+      const newUser = await userService.createUser({
         name,
         phone,
         password,
         address,
       });
 
+      const formattedUser = formatUser(newUser); // Formatando o usuário
+
       res.status(201).json({
         message: 'Usuário cadastrado com sucesso',
-        user,
+        user: formattedUser,
       });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -30,15 +34,15 @@ export class UserController {
     try {
       const { id } = req.params;
       const user = await userService.getUser(id);
-      if (user) {
-        res.status(200).json({ message: 'Usuário encontrado', user });
+      const formattedUser = formatUser(user); // Formatando o usuário
+
+      if (formattedUser) {
+        res.status(200).json({ message: 'Usuário encontrado', user: formattedUser });
       } else {
         res.status(404).json({ message: 'Usuário não encontrado' });
       }
     } catch (error: any) {
-      res
-        .status(500)
-        .json({ message: 'Erro ao buscar usuário', error: error.message });
+      res.status(500).json({ message: 'Erro ao buscar usuário', error: error.message });
     }
   }
 
@@ -46,11 +50,13 @@ export class UserController {
   static async getAllUsers(req: Request, res: Response) {
     try {
       const users = await userService.getAllUsers();
-      res.status(200).json({ message: 'Usuários listados com sucesso', users });
-    } catch (error: any) {
+      const formattedUsers = users.map((user) => formatUser(user)); // Formatando os usuários
+
       res
-        .status(500)
-        .json({ message: 'Erro ao buscar usuários', error: error.message });
+        .status(200)
+        .json({ message: 'Usuários listados com sucesso', users: formattedUsers });
+    } catch (error: any) {
+      res.status(500).json({ message: 'Erro ao buscar usuários', error: error.message });
     }
   }
 
@@ -67,14 +73,13 @@ export class UserController {
       });
 
       if (updatedUser) {
+        const formattedUser = formatUser(updatedUser); // Formatando o usuário
         res.status(200).json({
           message: 'Usuário atualizado com sucesso',
-          user: updatedUser,
+          user: formattedUser,
         });
       } else {
-        res
-          .status(404)
-          .json({ message: 'Usuário não encontrado para atualização' });
+        res.status(404).json({ message: 'Usuário não encontrado para atualização' });
       }
     } catch (error: any) {
       res
@@ -90,18 +95,16 @@ export class UserController {
       const deletedUser = await userService.deleteUser(id);
 
       if (deletedUser) {
-        res
-          .status(200)
-          .json({ message: 'Usuário deletado com sucesso', user: deletedUser });
+        const formattedUser = formatUser(deletedUser); // Formatando o usuário
+        res.status(200).json({
+          message: 'Usuário deletado com sucesso',
+          user: formattedUser,
+        });
       } else {
-        res
-          .status(404)
-          .json({ message: 'Usuário não encontrado para deleção' });
+        res.status(404).json({ message: 'Usuário não encontrado para deleção' });
       }
     } catch (error: any) {
-      res
-        .status(500)
-        .json({ message: 'Erro ao deletar usuário', error: error.message });
+      res.status(500).json({ message: 'Erro ao deletar usuário', error: error.message });
     }
   }
 }

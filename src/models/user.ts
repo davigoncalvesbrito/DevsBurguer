@@ -6,7 +6,12 @@ class User extends Model {
   public name!: string;
   public phone!: string;
   public password!: string;
-  public address!: string;
+  public address!: {
+    bairro: string;
+    rua: string;
+    numero: string;
+    pontoReferencia?: string;
+  };
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -34,7 +39,7 @@ User.init(
       allowNull: false,
     },
     address: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
   },
@@ -45,3 +50,17 @@ User.init(
 );
 
 export { User };
+
+// Método para formatar JSON em ordem
+export function formatUser(user: User | null) {
+  if (!user) return null;
+
+  return {
+    id: user.id,
+    name: user.name,
+    phone: user.phone,
+    address: user.address,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+  };
+}

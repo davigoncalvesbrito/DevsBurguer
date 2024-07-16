@@ -1,13 +1,16 @@
-interface CreateUserInput {
+export interface CreateUserInput {
   name: string;
   phone: string;
   password: string;
-  address: string;
+  address: {
+    bairro: string;
+    rua: string;
+    numero: string;
+    pontoReferencia?: string;
+  };
 }
 
-export { CreateUserInput };
-
-interface ProductAttributes {
+export interface ProductAttributes {
   name: string;
   description: string;
   price: number;
@@ -17,5 +20,3 @@ interface ProductAttributes {
   quantityAvailable: number;
   ingredients?: string[];
 }
-
-export { ProductAttributes };
