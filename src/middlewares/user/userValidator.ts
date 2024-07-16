@@ -1,7 +1,7 @@
 // src/middlewares/userValidator.ts
 import { check, validationResult } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
-import { User } from '../models/user';
+import { User } from '../../models/user';
 
 export const userValidator = [
   check('name')
