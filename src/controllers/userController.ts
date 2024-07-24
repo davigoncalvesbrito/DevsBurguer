@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
 import { CreateUserInput } from '../utils/types';
-import { User } from '../models/user';
 import { formatUser } from '../models/user';
 
 const userService = new UserService();
