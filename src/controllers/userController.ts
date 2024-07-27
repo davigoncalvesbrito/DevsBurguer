@@ -9,12 +9,11 @@ export class UserController {
   // Método para criar um novo usuário
   static async createUser(req: Request, res: Response) {
     try {
-      const { name, phone, password, address } = req.body as CreateUserInput;
+      const { name, phone, password } = req.body as CreateUserInput;
       const newUser = await userService.createUser({
         name,
         phone,
         password,
-        address,
       });
 
       const formattedUser = formatUser(newUser); // Formatando o usuário
@@ -63,12 +62,11 @@ export class UserController {
   static async updateUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const { name, phone, password, address } = req.body;
+      const { name, phone, password } = req.body;
       const updatedUser = await userService.updateUser(id, {
         name,
         phone,
         password,
-        address,
       });
 
       if (updatedUser) {

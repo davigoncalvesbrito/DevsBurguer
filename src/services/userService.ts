@@ -9,7 +9,6 @@ export class UserService {
         name: data.name,
         phone: data.phone,
         password: data.password,
-        address: data.address,
       });
 
       return newUser;

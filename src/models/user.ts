@@ -6,12 +6,6 @@ class User extends Model {
   public name!: string;
   public phone!: string;
   public password!: string;
-  public address!: {
-    bairro: string;
-    rua: string;
-    numero: string;
-    pontoReferencia?: string;
-  };
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -38,10 +32,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    address: {
-      type: DataTypes.JSONB,
-      allowNull: false,
-    },
   },
   {
     sequelize,
@@ -59,7 +49,6 @@ export function formatUser(user: User | null) {
     id: user.id,
     name: user.name,
     phone: user.phone,
-    address: user.address,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
   };

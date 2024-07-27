@@ -2,12 +2,6 @@ export interface CreateUserInput {
   name: string;
   phone: string;
   password: string;
-  address: {
-    bairro: string;
-    rua: string;
-    numero: string;
-    pontoReferencia?: string;
-  };
 }
 
 export interface ProductAttributes {
