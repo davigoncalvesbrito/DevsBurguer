@@ -6,6 +6,7 @@ export function formatAddress(address: Address | null) {
   return {
     id: address.id,
     userId: address.userId,
+    cidade: address.cidade,
     bairro: address.bairro,
     rua: address.rua,
     numero: address.numero,

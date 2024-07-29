@@ -14,3 +14,11 @@ export interface ProductAttributes {
   quantityAvailable: number;
   ingredients?: string[];
 }
+
+export interface CreateAddressInput {
+  cidade: string;
+  bairro: string;
+  rua: string;
+  number: string;
+  pontoReferencia?: string; // ponto de referência (opcional)
+}

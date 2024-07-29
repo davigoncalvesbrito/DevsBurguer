@@ -4,6 +4,7 @@ import { sequelize } from '../dbConfig';
 class Address extends Model {
   public id!: string;
   public userId!: number;
+  public cidade!: string;
   public bairro!: string;
   public rua!: string;
   public numero!: string;
@@ -24,6 +25,10 @@ Address.init(
     },
     userId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    cidade: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     bairro: {

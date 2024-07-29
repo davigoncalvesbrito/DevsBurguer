@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { AddressService } from '../services/addressService';
 import { formatAddress } from '../utils/formatted/formatAddress'; // Função de formatação para Address
+import { CreateAddressInput } from '../utils/types';
 
 const addressService = new AddressService();
 
@@ -9,7 +10,7 @@ export class AddressController {
   static async addAddressToUser(req: Request, res: Response) {
     try {
       const { userId } = req.params;
-      const addressData = req.body;
+      const addressData = req.body as CreateAddressInput; // Usando a interface
       const address = await addressService.addAddressToUser(Number(userId), addressData);
       const formattedAddress = formatAddress(address);
 
@@ -26,7 +27,7 @@ export class AddressController {
   static async updateAddress(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const addressData = req.body;
+      const addressData = req.body as CreateAddressInput; // Usando a interface
       const updatedAddress = await addressService.updateAddress(id, addressData);
 
       if (updatedAddress) {
