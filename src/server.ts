@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { connectDatabase } from '../src/dbConfig'; // Importe a função de conexão corretamente
+import { connectDatabase } from './dbconfig';
 import { User, Address } from './models/modelAssociation/modelAssociations'; // Importar todos os modelos
 import userRouter from './routes/userRouter'; // Importe suas rotas de usuário
 import productRouter from './routes/productRouter';

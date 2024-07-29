@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig';
+import { sequelize } from '../dbconfig';
 import { Address } from './address';
 import { formatDateToBrazilianTime } from '../utils/dateUtils';
 class User extends Model {
