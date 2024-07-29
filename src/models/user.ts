@@ -1,7 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../dbConfig';
 import { Address } from './address';
-
+import { formatDateToBrazilianTime } from '../utils/dateUtils';
 class User extends Model {
   public id!: number;
   public name!: string;
@@ -9,7 +9,6 @@ class User extends Model {
   public password!: string;
   public addresses?: Address[];
 
-  // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -38,6 +37,7 @@ User.init(
   {
     sequelize,
     modelName: 'User',
+    timestamps: true,
   },
 );
 

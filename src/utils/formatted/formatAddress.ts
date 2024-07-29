@@ -1,4 +1,5 @@
 import { Address } from '../../models/address';
+import { formatDateToBrazilianTime } from '../dateUtils';
 
 export function formatAddress(address: Address | null) {
   if (!address) return null;
@@ -11,7 +12,7 @@ export function formatAddress(address: Address | null) {
     rua: address.rua,
     numero: address.numero,
     pontoReferencia: address.pontoReferencia,
-    createdAt: address.createdAt,
-    updatedAt: address.updatedAt,
+    createdAt: formatDateToBrazilianTime(address.createdAt),
+    updatedAt: formatDateToBrazilianTime(address.updatedAt),
   };
 }

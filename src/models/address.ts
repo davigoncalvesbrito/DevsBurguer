@@ -10,7 +10,6 @@ class Address extends Model {
   public numero!: string;
   public pontoReferencia?: string;
 
-  // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -51,6 +50,7 @@ Address.init(
   {
     sequelize,
     modelName: 'Address',
+    timestamps: true,
   },
 );
 

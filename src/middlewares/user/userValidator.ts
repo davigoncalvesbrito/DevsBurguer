@@ -8,7 +8,11 @@ export const userValidator = [
     .notEmpty()
     .withMessage('O nome é obrigatório.')
     .isString()
-    .withMessage('O nome deve ser um texto.'),
+    .withMessage('O nome deve ser um texto.')
+    .matches(/^[A-Za-zÀ-ÿ]+(?:\s[A-Za-zÀ-ÿ]+)*$/)
+    .withMessage('O nome deve conter apenas letras e espaços simples entre palavras.')
+    .custom((value) => value.trim().length > 0)
+    .withMessage('O nome não pode ser apenas espaços em branco.'),
 
   check('phone')
     .isMobilePhone('pt-BR')

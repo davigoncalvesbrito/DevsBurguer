@@ -12,7 +12,6 @@ class Product extends Model {
   public quantityAvailable!: number;
   public ingredients?: string[];
 
-  // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -61,6 +60,7 @@ Product.init(
   {
     sequelize,
     modelName: 'Product',
+    timestamps: true,
   },
 );
 
