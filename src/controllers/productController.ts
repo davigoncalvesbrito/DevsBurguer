@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { ProductService } from '../services/productService';
 import { ProductAttributes } from '../utils/types';
+import { formatProduct } from '../utils/formatted/formatProduct'; // Ajuste o caminho conforme a estrutura do seu projeto
 
 const productService = new ProductService();
 
@@ -31,7 +32,7 @@ export class ProductController {
 
       res.status(201).json({
         message: 'Produto cadastrado com sucesso',
-        product,
+        product: formatProduct(product),
       });
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -44,7 +45,9 @@ export class ProductController {
       const { id } = req.params;
       const product = await productService.getProduct(id);
       if (product) {
-        res.status(200).json({ message: 'Produto encontrado', product });
+        res
+          .status(200)
+          .json({ message: 'Produto encontrado', product: formatProduct(product) });
       } else {
         res.status(404).json({ message: 'Produto não encontrado' });
       }
@@ -57,13 +60,16 @@ export class ProductController {
   static async getAllProducts(req: Request, res: Response) {
     try {
       const products = await productService.getAllProducts();
-      res.status(200).json({ message: 'Produtos listados com sucesso', products });
+      const formattedProducts = products.map(formatProduct);
+      res
+        .status(200)
+        .json({ message: 'Produtos listados com sucesso', product: formattedProducts });
     } catch (error: any) {
       res.status(500).json({ message: 'Erro ao buscar produtos', error: error.message });
     }
   }
 
-  // Método para buscar todas as categorias
+  // Método Listar todas as categorias existentes
   static async listCategories(req: Request, res: Response) {
     try {
       const categories = await productService.listCategories();
@@ -79,14 +85,17 @@ export class ProductController {
     }
   }
 
-  // Método para buscar produtos por categoria
+  // Método Lista uma categoria especifica
   static async getProductsByCategory(req: Request, res: Response) {
     try {
       const { category } = req.params;
       const products = await productService.getProductsByCategory(category);
+      const formattedProducts = products.map(formatProduct);
 
       if (products.length > 0) {
-        res.status(200).json({ message: 'Produtos encontrados', products });
+        res
+          .status(200)
+          .json({ message: 'Produtos encontrados', products: formattedProducts });
       } else {
         res
           .status(404)
@@ -127,7 +136,7 @@ export class ProductController {
       if (updatedProduct) {
         res.status(200).json({
           message: 'Produto atualizado com sucesso',
-          product: updatedProduct,
+          product: formatProduct(updatedProduct),
         });
       } else {
         res.status(404).json({ message: 'Produto não encontrado para atualização' });
@@ -148,7 +157,7 @@ export class ProductController {
       if (deletedProduct) {
         res.status(200).json({
           message: 'Produto deletado com sucesso',
-          product: deletedProduct,
+          product: formatProduct(deletedProduct),
         });
       } else {
         res.status(404).json({ message: 'Produto não encontrado para deleção' });

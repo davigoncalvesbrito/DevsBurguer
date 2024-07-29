@@ -1,13 +1,10 @@
-interface CreateUserInput {
+export interface CreateUserInput {
   name: string;
   phone: string;
   password: string;
-  address: string;
 }
 
-export { CreateUserInput };
-
-interface ProductAttributes {
+export interface ProductAttributes {
   name: string;
   description: string;
   price: number;
@@ -18,4 +15,10 @@ interface ProductAttributes {
   ingredients?: string[];
 }
 
-export { ProductAttributes };
+export interface CreateAddressInput {
+  cidade: string;
+  bairro: string;
+  rua: string;
+  number: string;
+  pontoReferencia?: string; // ponto de referência (opcional)
+}

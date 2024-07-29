@@ -1,14 +1,14 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig'; // Corrija o caminho conforme necessário
-
+import { sequelize } from '../dbConfig';
+import { Address } from './address';
+import { formatDateToBrazilianTime } from '../utils/dateUtils';
 class User extends Model {
-  public id!: string;
+  public id!: number;
   public name!: string;
   public phone!: string;
   public password!: string;
-  public address!: string;
+  public addresses?: Address[];
 
-  // timestamps!
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
@@ -16,8 +16,8 @@ class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
@@ -33,14 +33,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   },
   {
     sequelize,
     modelName: 'User',
+    timestamps: true,
   },
 );
 

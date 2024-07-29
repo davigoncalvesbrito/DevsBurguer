@@ -1,6 +1,6 @@
+import { Op } from 'sequelize';
 import { Product } from '../models/product';
 import { ProductAttributes } from '../utils/types';
-
 export class ProductService {
   // Método para criar um novo produto
   async createProduct(data: ProductAttributes): Promise<Product> {
@@ -59,11 +59,15 @@ export class ProductService {
   // Método para buscar produtos por categoria
   async getProductsByCategory(category: string): Promise<Product[]> {
     try {
+      // Usar Op.iLike para buscar de forma insensível ao caso
       const products = await Product.findAll({
         where: {
-          category: category,
+          category: {
+            [Op.iLike]: category, // Insensível ao caso
+          },
         },
       });
+
       return products;
     } catch (error: any) {
       throw new Error(`Erro ao buscar produtos por categoria: ${error.message}`);
