@@ -1,11 +1,13 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig'; // Corrija o caminho conforme necessário
+import { sequelize } from '../dbConfig';
+import { Address } from './address';
 
 class User extends Model {
-  public id!: string;
+  public id!: number;
   public name!: string;
   public phone!: string;
   public password!: string;
+  public addresses?: Address[];
 
   // timestamps!
   public readonly createdAt!: Date;
@@ -15,8 +17,8 @@ class User extends Model {
 User.init(
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
       allowNull: false,
     },
@@ -40,16 +42,3 @@ User.init(
 );
 
 export { User };
-
-// Método para formatar JSON em ordem
-export function formatUser(user: User | null) {
-  if (!user) return null;
-
-  return {
-    id: user.id,
-    name: user.name,
-    phone: user.phone,
-    createdAt: user.createdAt,
-    updatedAt: user.updatedAt,
-  };
-}

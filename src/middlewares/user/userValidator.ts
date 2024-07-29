@@ -37,29 +37,6 @@ export const userValidator = [
     .matches(/(?=.*[!@#$%^&*])/, 'g')
     .withMessage('A senha deve conter pelo menos um caractere especial.'),
 
-  check('address.bairro')
-    .notEmpty()
-    .withMessage('O bairro é obrigatório.')
-    .isString()
-    .withMessage('O bairro deve ser um texto.'),
-
-  check('address.rua')
-    .notEmpty()
-    .withMessage('A rua é obrigatória.')
-    .isString()
-    .withMessage('A rua deve ser um texto.'),
-
-  check('address.numero')
-    .notEmpty()
-    .withMessage('O número é obrigatório.')
-    .isString()
-    .withMessage('O número deve ser um texto.'),
-
-  check('address.pontoReferencia')
-    .optional()
-    .isString()
-    .withMessage('O ponto de referência deve ser um texto.'),
-
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
