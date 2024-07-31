@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig';
+import { dbConnection } from '../dbconfig';
 
 class Product extends Model {
   public id!: string;
@@ -58,7 +58,7 @@ Product.init(
     },
   },
   {
-    sequelize,
+    sequelize: dbConnection,
     modelName: 'Product',
     timestamps: true,
   },

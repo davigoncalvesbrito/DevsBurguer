@@ -1,7 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig';
+import { dbConnection } from '../dbconfig';
 import { Address } from './address';
-import { formatDateToBrazilianTime } from '../utils/dateUtils';
 class User extends Model {
   public id!: number;
   public name!: string;
@@ -35,7 +34,7 @@ User.init(
     },
   },
   {
-    sequelize,
+    sequelize: dbConnection,
     modelName: 'User',
     timestamps: true,
   },

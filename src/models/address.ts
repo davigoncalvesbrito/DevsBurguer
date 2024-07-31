@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../dbConfig';
+import { dbConnection } from '../dbconfig';
 
 class Address extends Model {
   public id!: string;
@@ -48,7 +48,7 @@ Address.init(
     },
   },
   {
-    sequelize,
+    sequelize: dbConnection,
     modelName: 'Address',
     timestamps: true,
   },
