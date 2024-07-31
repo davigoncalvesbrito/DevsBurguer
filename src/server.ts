@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './dbconfig';
-import { User, Address } from './models/modelAssociation/modelAssociations'; // Importar todos os modelos
-import userRouter from './routes/userRouter'; // Importe suas rotas de usuário
+import { User, Address } from './models/modelAssociation/modelAssociations';
+import userRouter from './routes/userRouter';
 import productRouter from './routes/productRouter';
 import addressRouter from './routes/addressRouter';
 
