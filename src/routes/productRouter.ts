@@ -1,22 +1,28 @@
 import { Router } from 'express';
-import { ProductController } from '../controllers/productController';
+import { createProduct } from '../controllers/product/createProduct';
+import { getProduct } from '../controllers/product/getProduct';
+import { getAllProduct } from '../controllers/product/getAllProduct';
+import { listCategories } from '../controllers/product/listCategories';
+import { getProductByCategory } from '../controllers/product/getProductByCategory';
+import { updateProduct } from '../controllers/product/updateProduct';
+import { deleteProduct } from '../controllers/product/deleteProduct';
 import { productValidator } from '../middlewares/product/productValidator';
 
-const router = Router();
+const productRouter = Router();
 
 /***  ROTAS GET  ***/
-router.get('/products/:id', ProductController.getProduct); // Listar produtos pelo  ID
-router.get('/products', ProductController.getAllProducts); // Listar  todos os produtos
-router.get('/products/category/:category', ProductController.getProductsByCategory); // Lista uma categoria especifica
-router.get('/products/all/categories', ProductController.listCategories); // Listar todas as categorias existentes
+productRouter.get('/products/:id', getProduct); // Listar produtos pelo  ID
+productRouter.get('/products', getAllProduct); // Listar  todos os produtos
+productRouter.get('/products/category/:category', getProductByCategory); // Lista uma categoria especifica
+productRouter.get('/products/all/categories', listCategories); // Listar todas as categorias existentes
 
 /***  ROTAS POST  ***/
-router.post('/products', productValidator, ProductController.createProduct); // Rota para criar produto
+productRouter.post('/products', productValidator, createProduct); // Rota para criar produto
 
 /***  ROTAS PUT  ***/
-router.put('/products/:id', productValidator, ProductController.updateProduct); // Rota para atualizar produto
+productRouter.put('/products/:id', productValidator, updateProduct); // Rota para atualizar produto
 
 /***  ROTAS DELETE ***/
-router.delete('/products/:id', ProductController.deleteProduct); // Rota para deletar produto
+productRouter.delete('/products/:id', deleteProduct); // Rota para deletar produto
 
-export default router;
+export default productRouter;
