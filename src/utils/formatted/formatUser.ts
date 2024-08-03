@@ -8,6 +8,7 @@ export function formatUser(user: User | null) {
     id: user.id,
     name: user.name,
     phone: user.phone,
+    password: user.password,
     createdAt: formatDateToBrazilianTime(user.createdAt),
     updatedAt: formatDateToBrazilianTime(user.updatedAt),
     addresses: user.addresses?.map((address) => ({
