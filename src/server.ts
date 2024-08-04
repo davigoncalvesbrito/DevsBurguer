@@ -1,24 +1,27 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './dbconfig';
 import { User, Address } from './models/modelAssociation/modelAssociations';
+import { authenticateJWT } from './middlewares/auth/authenticateJwt';
 import userRouter from './routes/userRouter';
 import productRouter from './routes/productRouter';
 import addressRouter from './routes/addressRouter';
+import passport from 'passport';
+import authRouter from './routes/authRoutes';
 
 dotenv.config();
 
 const app = express();
+app.use(passport.initialize());
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Use suas rotas de usuário
-app.use('/api', userRouter); // Use prefixo '/api' para as rotas de usuário
-app.use('/menu', productRouter); // Use prefixo '/api' para as rotas de usuário
+app.use('/api', authenticateJWT, userRouter);
+app.use('/menu', authenticateJWT, productRouter);
 app.use('/api', addressRouter);
+app.use(authRouter);
 
 const PORT = process.env.PORT || 3000;
 
