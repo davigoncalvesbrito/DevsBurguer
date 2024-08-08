@@ -37,6 +37,7 @@ export const authenticateUser = async (phone: string, password: string) => {
     return {
       message: 'Autenticado com sucesso',
       token,
+      user,
     };
   } catch (error) {
     if (error instanceof Error) {

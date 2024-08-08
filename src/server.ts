@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './dbconfig';
 import { User, Address } from './models/modelAssociation/modelAssociations';
-import { authenticateJWT } from './middlewares/auth/authenticateJwt';
 import userRouter from './routes/userRouter';
 import productRouter from './routes/productRouter';
 import addressRouter from './routes/addressRouter';
@@ -18,8 +17,8 @@ app.use(passport.initialize());
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', authenticateJWT, userRouter);
-app.use('/menu', authenticateJWT, productRouter);
+app.use('/api', userRouter);
+app.use('/menu', productRouter);
 app.use('/api', addressRouter);
 app.use(authRouter);
 
