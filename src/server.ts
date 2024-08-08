@@ -2,13 +2,19 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDatabase } from './dbconfig';
-import { User, Address } from './models/modelAssociation/modelAssociations';
+import {
+  User,
+  Address,
+  Order,
+  OrderItem,
+  Product,
+} from './models/modelAssociation/modelAssociations';
 import userRouter from './routes/userRouter';
 import productRouter from './routes/productRouter';
 import addressRouter from './routes/addressRouter';
 import passport from 'passport';
 import authRouter from './routes/authRoutes';
-
+import orderRouter from './routes/orderRouter';
 dotenv.config();
 
 const app = express();
@@ -21,14 +27,19 @@ app.use('/api', userRouter);
 app.use('/menu', productRouter);
 app.use('/api', addressRouter);
 app.use(authRouter);
+app.use('/pedido', orderRouter);
 
 const PORT = process.env.PORT || 3000;
 
 connectDatabase()
   .then(async () => {
     // Sincronizar os modelos com o banco de dados
-    await User.sync();
-    await Address.sync();
+    await User.sync({ alter: true });
+    await Address.sync({ alter: true });
+    await Order.sync({ alter: true });
+    await OrderItem.sync({ alter: true });
+    await Product.sync({ alter: true });
+
     app.listen(PORT, () => {
       console.log(`Servidor rodando na porta ${PORT}`);
     });
