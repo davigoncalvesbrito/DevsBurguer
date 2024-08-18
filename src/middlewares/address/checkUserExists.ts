@@ -8,8 +8,8 @@ export const checkUserExists = async (
 ) => {
   const userId = parseInt(req.params.userId, 10);
 
-  // Verifique se o usuário existe com o userId fornecido
-  const user = await User.findByPk(userId); // Supondo que `findByPk` seja o método para encontrar um usuário pelo ID
+  // Verifica se o usuário existe com o userId fornecido
+  const user = await User.findByPk(userId);
 
   if (!user) {
     return res.status(400).json({
