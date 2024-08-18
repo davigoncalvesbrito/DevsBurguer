@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import { AddressController } from '../controllers/addressController';
+import { createAddress } from '../controllers/address/createAddress';
+import { deleteAddress } from '../controllers/address/deleteAddress';
+import { updateAddress } from '../controllers/address/updateAddress';
 import { addressValidator } from '../middlewares/address/addressValidator';
 import { validationErrorHandler } from '../middlewares/validators/validationErrorHandler';
 import { checkUserExists } from '../middlewares/address/checkUserExists';
@@ -10,7 +12,7 @@ router.post(
   checkUserExists,
   addressValidator,
   validationErrorHandler,
-  AddressController.addAddressToUser,
+  createAddress,
 );
 
 router.put(
@@ -18,9 +20,9 @@ router.put(
   checkUserExists,
   addressValidator,
   validationErrorHandler,
-  AddressController.updateAddress,
+  updateAddress,
 );
 
-router.delete('/delete/address/:id', AddressController.deleteAddress);
+router.delete('/delete/address/:id', deleteAddress);
 
 export default router;
