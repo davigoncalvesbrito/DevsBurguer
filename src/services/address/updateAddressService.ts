@@ -12,6 +12,8 @@ export const updateAddressService = async (
     }
     return null;
   } catch (error) {
-    throw new Error(`Erro ao atualizar endereço: ${error}`);
+    throw new Error(
+      `Erro ao atualizar Endereço: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

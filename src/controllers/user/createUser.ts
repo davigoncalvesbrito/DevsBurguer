@@ -13,7 +13,7 @@ export const createUser = async (req: Request, res: Response) => {
       message: 'Usuário cadastrado com sucesso',
       user: formattedUser,
     });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+  } catch (error) {
+    res.status(400).json({ message: error });
   }
 };

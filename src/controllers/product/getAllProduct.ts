@@ -9,7 +9,7 @@ export const getAllProduct = async (req: Request, res: Response) => {
     res
       .status(200)
       .json({ message: 'Produtos listados com sucesso', products: formattedProducts });
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao buscar produtos', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar produtos', error: error });
   }
 };

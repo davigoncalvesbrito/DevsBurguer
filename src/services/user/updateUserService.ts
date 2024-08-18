@@ -11,7 +11,9 @@ export const updateUserService = async (
       return user;
     }
     return null;
-  } catch (error: any) {
-    throw new Error(`Erro ao atualizar usuário: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao atualizar Usuário: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

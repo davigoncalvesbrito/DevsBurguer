@@ -17,7 +17,7 @@ export const updateUser = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Usuário não encontrado para atualização' });
     }
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao atualizar usuário', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao atualizar usuário', error });
   }
 };

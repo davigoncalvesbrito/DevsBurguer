@@ -16,6 +16,8 @@ export const createAddressService = async (
     const address = await Address.create({ ...addressData, userId });
     return address;
   } catch (error) {
-    throw new Error(`Erro ao adicionar endereço: ${error}`);
+    throw new Error(
+      `Erro ao adicionar Endereço: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

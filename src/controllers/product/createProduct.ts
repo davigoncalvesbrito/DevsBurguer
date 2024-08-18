@@ -30,7 +30,7 @@ export const createProduct = async (req: Request, res: Response) => {
       message: 'Produto cadastrado com sucesso',
       product: formatProduct(product),
     });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+  } catch (error) {
+    res.status(400).json({ message: error });
   }
 };

@@ -7,7 +7,9 @@ export const getUserService = async (id: string): Promise<User | null> => {
       include: [{ model: Address, as: 'addresses' }],
     });
     return user;
-  } catch (error: any) {
-    throw new Error(`Erro ao buscar usuário: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao buscar Usuário: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

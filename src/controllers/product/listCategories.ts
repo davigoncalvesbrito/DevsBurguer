@@ -8,10 +8,10 @@ export const listCategories = async (req: Request, res: Response) => {
       message: 'Categorias listadas com sucesso',
       categories: categories,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       message: 'Erro ao listar categorias',
-      error: error.message,
+      error: error,
     });
   }
 };

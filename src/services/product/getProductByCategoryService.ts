@@ -13,7 +13,9 @@ export const getProductsByCategoryService = async (
       },
     });
     return products;
-  } catch (error: any) {
-    throw new Error(`Erro ao buscar produtos por categoria: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao buscar Produtos por Categorias: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

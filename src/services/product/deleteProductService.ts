@@ -8,7 +8,9 @@ export const deleteProductService = async (id: string): Promise<Product | null> 
       return product;
     }
     return null;
-  } catch (error: any) {
-    throw new Error(`Erro ao deletar produto: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao deletar Produto: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

@@ -14,7 +14,9 @@ export const createProductService = async (data: ProductAttributes): Promise<Pro
       ingredients: data.ingredients,
     });
     return newProduct;
-  } catch (error: any) {
-    throw new Error(`Erro ao criar produto: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao criar Produto: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

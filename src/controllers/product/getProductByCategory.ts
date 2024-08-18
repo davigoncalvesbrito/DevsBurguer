@@ -15,9 +15,9 @@ export const getProductByCategory = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Nenhum produto encontrado para esta categoria' });
     }
-  } catch (error: any) {
+  } catch (error) {
     res
       .status(500)
-      .json({ message: 'Erro ao buscar produtos por categoria', error: error.message });
+      .json({ message: 'Erro ao buscar produtos por categoria', error: error });
   }
 };

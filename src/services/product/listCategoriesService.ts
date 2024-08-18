@@ -7,7 +7,9 @@ export const listCategoriesService = async (): Promise<string[]> => {
       group: ['category'],
     });
     return categories.map((cat) => cat.category);
-  } catch (error: any) {
-    throw new Error(`Erro ao buscar categorias: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao buscar categorias: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

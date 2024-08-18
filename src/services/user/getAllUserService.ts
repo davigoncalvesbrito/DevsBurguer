@@ -7,7 +7,9 @@ export const getAllUsersService = async (): Promise<User[]> => {
       include: [{ model: Address, as: 'addresses' }],
     });
     return users;
-  } catch (error: any) {
-    throw new Error(`Erro ao buscar todos os usuários: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao buscar todos os Usuário: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

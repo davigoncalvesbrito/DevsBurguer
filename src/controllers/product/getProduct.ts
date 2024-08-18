@@ -13,7 +13,7 @@ export const getProduct = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Produto não encontrado' });
     }
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao buscar produto', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar produto', error: error });
   }
 };

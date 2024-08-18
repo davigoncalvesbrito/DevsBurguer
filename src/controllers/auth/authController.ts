@@ -8,7 +8,7 @@ export const login = async (req: Request, res: Response) => {
     const { token, user } = await authenticateUser(phone, password);
     const formattedUser = formatUser(user);
     res.json({ token, user: formattedUser });
-  } catch (error: any) {
-    res.status(401).json({ message: error.message });
+  } catch (error) {
+    res.status(401).json({ message: error });
   }
 };

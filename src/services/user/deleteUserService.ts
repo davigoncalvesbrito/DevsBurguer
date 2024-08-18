@@ -8,7 +8,9 @@ export const deleteUserService = async (id: string): Promise<User | null> => {
       return user;
     }
     return null;
-  } catch (error: any) {
-    throw new Error(`Erro ao deletar usuário: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao deletar Usuário: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

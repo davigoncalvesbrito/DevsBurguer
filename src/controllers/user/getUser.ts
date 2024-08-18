@@ -13,7 +13,7 @@ export const getUser = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Usuário não encontrado' });
     }
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao buscar usuário', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar usuário', error: error });
   }
 };

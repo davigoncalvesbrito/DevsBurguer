@@ -14,7 +14,9 @@ export const createUserService = async (data: CreateUserInput): Promise<User> =>
     });
 
     return newUser;
-  } catch (error: any) {
-    throw new Error(`Erro ao criar usuário: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao criar Usuário: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

@@ -12,7 +12,9 @@ export const updateProductService = async (
       return product;
     }
     return null;
-  } catch (error: any) {
-    throw new Error(`Erro ao atualizar produto: ${error.message}`);
+  } catch (error) {
+    throw new Error(
+      `Erro ao atualizar Produto: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };

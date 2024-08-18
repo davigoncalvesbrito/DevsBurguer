@@ -10,7 +10,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res
       .status(200)
       .json({ message: 'Usuários listados com sucesso', users: formattedUsers });
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao buscar usuários', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar usuários', error: error });
   }
 };

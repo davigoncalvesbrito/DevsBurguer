@@ -16,7 +16,7 @@ export const deleteUser = async (req: Request, res: Response) => {
     } else {
       res.status(404).json({ message: 'Usuário não encontrado para deleção' });
     }
-  } catch (error: any) {
-    res.status(500).json({ message: 'Erro ao deletar usuário', error: error.message });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao deletar usuário', error: error });
   }
 };

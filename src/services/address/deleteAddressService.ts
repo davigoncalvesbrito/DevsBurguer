@@ -11,6 +11,8 @@ export const deleteAddressService = async (
     }
     return null;
   } catch (error) {
-    throw new Error(`Erro ao deletar endereço: ${error}`);
+    throw new Error(
+      `Erro ao deletar Endereço: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+    );
   }
 };
