@@ -8,6 +8,8 @@ import productRouter from './routes/productRouter';
 import addressRouter from './routes/addressRouter';
 import passport from 'passport';
 import authRouter from './routes/authRoutes';
+import { authenticateJWT } from './middlewares/auth/authenticateJwt';
+
 dotenv.config();
 
 const app = express();
@@ -17,8 +19,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', userRouter);
-app.use('/menu', productRouter);
-app.use('/api', addressRouter);
+app.use('/menu', authenticateJWT, productRouter);
+app.use('/api', authenticateJWT, addressRouter);
 app.use(authRouter);
 
 const PORT = process.env.PORT || 3000;
